@@ -1,0 +1,121 @@
+section .bss ; highlighted
+section .bss: ; not highlighted
+section .rodata ; not highlighted
+section .bss:
+section .bss
+section .text
+section .data
+section .rodata
+
+label1:
+label2: ;comment
+label3: mov ax, bx
+label4: mov ax, bx ;comment
+label_$#@~.?:
+label# mov ax, bx ;not a comment
+.valid:
+_valid:
+?valid:
+$invalid:
+@invalid:
+~invalid:
+#preprocessor
+# gas comment
+;comment
+label: # also gas comment
+
+	mov ax, bx ;comment
+	jmp $eax
+	jne $jmp
+
+cs	mov [bx],ax
+	mov [es:bx],ax
+a16	mov	[bx],ax
+a32	mov	[ebx],eax
+a64	mov	[rbx],rax
+o16	mov	[bx],ax
+o32	mov	[ebx],eax
+o64	mov	[rbx],rax
+
+    fadd    st1             ; this sets st0 := st0 + st1
+    fadd    st0, st1        ; so does this
+    fadd    st1, st0        ; this sets st1 := st1 + st0
+    fadd    to st1          ; so does this
+
+	mov ax,100              ; decimal
+	mov ax,0a2h             ; hex
+	mov ax,$0a2             ; hex again: the 0 is required
+	mov ax,0xa2             ; hex yet again
+	mov ax,777q             ; octal
+	mov ax,777o             ; octal again
+	mov ax,10010011b        ; binary
+
+
+align 16
+	db      0x55                ; just the byte 0x55
+	db      0x55,0x56,0x57      ; three bytes in succession
+	db      'a',0x55            ; character constants are OK
+	db      'hello',13,10,'$'   ; so are string constants
+	dw      0x1234              ; 0x34 0x12
+	dw      'a'                 ; 0x41 0x00 (it's just a number)
+	dw      'ab'                ; 0x41 0x42 (character constant)
+	dw      'abc'               ; 0x41 0x42 0x43 0x00 (string)
+	dd      0x12345678          ; 0x78 0x56 0x34 0x12
+	dq      0x1122334455667788  ; 0x88 0x77 0x66 0x55 0x44 0x33 0x22 0x11
+	ddq     0x112233445566778899aabbccddeeff00
+	; 0x00 0xff 0xee 0xdd 0xcc 0xbb 0xaa 0x99
+	; 0x88 0x77 0x66 0x55 0x44 0x33 0x22 0x11
+	do     0x112233445566778899aabbccddeeff00 ; same as previous
+	dd      .234567
+	dd      .234567e10
+	dd      .234567e-10
+	dd      1e20
+	dd      1e-20
+	dd      1.e10
+	dd      1.e-10
+	dd      1.234567
+	dd      1.234567e-20         ; floating-point constant
+	dd      1.234567e20         ; floating-point constant
+	dq      1.234567e20         ; double-precision float
+	dt      1.234567e20         ; extended-precision float
+
+    dw -0.5                 ; IEEE half precision
+    dd 1.2                  ; an easy one
+    dq 1.e10                ; 10,000,000,000
+    dq 1.e+10               ; synonymous with 1.e10
+    dq 1.e-10               ; 0.000 000 000 1
+    dt 3.141592653589793238462 ; pi
+
+buffer:         resb    64      ; reserve 64 bytes
+wordvar:        resw    1       ; reserve a word
+realarray:      resq    10      ; array of ten reals
+
+incbin "file.dat"        ; include the whole file
+incbin "file.dat",1024   ; skip the first 1024 bytes
+incbin "file.dat",1024,512 ; skip the first 1024, and
+                           ; actually include at most 512
+message db 'hello, world'
+msglen  equ $-message
+
+zerobuf:times 64 db 0
+buffer: db 'hello, world'
+        times 64-$+buffer db ' '
+		times 100 movsb
+
+        mov eax,'abcd'
+
+        mov ax, seg symbol
+        mov es, ax
+        mov bx, symbol
+
+        mov ax, weird_seg       ; weird_seg is a segment base
+        mov es, ax
+        mov bx, symbol wrt weird_seg
+
+        call (seg procedure):procedure
+        call weird_seg:(procedure wrt weird_seg)
+
+        dw symbol, seg symbol
+
+bits 32
+use32
