@@ -92,12 +92,12 @@ proc WindowProc hwnd,wmsg,wparam,lparam
 	invoke	glBegin,GL_QUADS
 	invoke	glColor3f,1.0,0.1,0.1
 	invoke	glVertex3f,-0.6,-0.6,0.0
-	invoke	glColor3f,0.1,0.1,0.1
+	invoke	glColor3f,1.0,1.0,1.0
 	invoke	glVertex3f,0.6,-0.6,0.0
-	invoke	glColor3f,0.1,0.1,1.0
+	invoke	glColor3f,0.1,0.2,1.0
 	invoke	glVertex3f,0.6,0.6,0.0
-	invoke	glColor3f,1.0,0.1,1.0
-	invoke	glVertex3f,-0.6,0.6,0.0
+	invoke	glColor3f,1.0,1.0,1.0
+	invoke	glVertex3f,-0.6,1.0,0.0
 	invoke	glEnd
 	invoke	SwapBuffers,[hdc]
 	xor	eax,eax
