@@ -1,18 +1,51 @@
-﻿#include <iostream>
-#include <set>
-#include <algorithm>
-#include <vector>
+﻿#include<iostream>
+#include<vector>
+#include<algorithm>
 using namespace std;
-int main() {
-    // 3 3 2 3 5 1 2 3
-    // 3 4 1 2 2 1 2 4 5
-    int n, m;
-    cin >> n >> m;
-    vector<int> arr (n);
-    for (int i = 0; i < n; ++i) cin >> arr[i];
-    for (int i = 0; i < m; ++i) {
-        int t;
-        cin >> t;
-        cout << (binary_search(arr.begin(), arr.end(), t) ? "YES" : "NO") << endl;
-    }
+
+vector<bool> used;
+vector <vector<int>> graph;
+vector<int> comp;
+
+void dfs(int vertex, int components)
+{
+	used[vertex] = true;
+	comp[vertex] = components;
+	for (auto u : graph[vertex])
+	{
+		if (!used[u])
+			dfs(u, components);
+	}
+}
+
+int main()
+{
+	int n, m;
+	cin >> m;
+	cin >> n;
+	graph.resize(m + 1);
+	used.resize(m + 1);
+	comp.resize(m + 1);
+	int components = 1;
+	
+	
+	for (int i = 0; i < n; i++)
+	{
+		int a, b;
+		cin >> a >> b;
+		graph[a].push_back(b);
+		graph[b].push_back(a);
+	}
+
+	for (int i = 1; i <= m; i++) {
+		if (!used[i]) {
+			dfs(i, components);
+			components++;
+		}
+	}
+	cout << components - 1 << endl;
+	for (int i = 1; i <= m; i++) {
+		cout << comp[i] << endl;
+	}
+	return 0;
 }
