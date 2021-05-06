@@ -1,8 +1,0 @@
-# [PackageDev] target_format: plist, ext: tmPreferences
-name: x86 and x86_64 Assembly
-uuid: 45EA40C9-830A-4159-9B89-8E85D03B36F3
-scope: source.asm.x86_64
-settings:
-  shellVariables:
-  - name: TM_COMMENT_START
-    value: '; '
