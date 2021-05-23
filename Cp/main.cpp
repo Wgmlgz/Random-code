@@ -51,7 +51,8 @@ ifstream fin("deb_in.txt");
 #define ed end()
 #define ALL(x) x.bg,x.ed
 #define clr(x) memset(x,0,sizeof(x))
-#define FIND(x, y) (x.find(y)!=x.ed)
+#define FIND(x,y) find(ALL(x),y)
+#define IN(x,y) (FIND(x,y)!=x.ed)
 #define SORT(x) sort(ALL(x))
 #define REV(x) reverse(ALL(x));
 #define SZ size()
@@ -75,7 +76,7 @@ const int MOD = 1'000'000'007;
 ll n, m, k;
 
 void solve(int TT) {
-  in >> n;
+
 }
 
 #pragma region
