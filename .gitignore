@@ -353,3 +353,4 @@ MigrationBackup/
 .ionide/
 Cp/main
 Cp/main.exe
+Cp/.vscode/
