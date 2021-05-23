@@ -86,8 +86,8 @@ int main() {
   int t = 1;
   in >> t;
   while (t--) {
-    dbs("")
-      solve(t);
+    dbs("");
+    solve(t);
   }
   return 0;
 }
