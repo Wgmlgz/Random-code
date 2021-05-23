@@ -76,18 +76,18 @@ ll n, m, k;
 
 void solve(int TT) {
   in >> n;
-  
+
 }
 
 #pragma region
-#ifdef MANY_TESTS
+#if MANY_TESTS
 int main() {
   ios_base::sync_with_stdio(0), in.tie(0), cout.tie(0);
   int t = 1;
   in >> t;
   while (t--) {
     dbs("")
-    solve(t);
+      solve(t);
   }
   return 0;
 }
