@@ -1,5 +1,5 @@
-#define DBG 1
-#define MANY_TESTS 0
+#define DBG 0
+#define MANY_TESTS 1
 
 #pragma region
 // bruh template for cp by Wgmlgz ver 0.5
@@ -53,20 +53,16 @@ typedef pair<ll, ll> pii;typedef vec<ll> vi;typedef vec<pii> vpii;typedef vec<vi
 #define fo_3(i,k,n) for(ll i=k;k<n?i<n:i>n;k<n?++i:--i)
 #define fo_4(i,a,b,c) for(ll i=k;a<b?i<b:i>b;i+=c)
 #define fo(...) GET_MACRO4(__VA_ARGS__,fo_4,fo_3,fo_2,fo_1)(__VA_ARGS__)
-
 // out
 #define O out<<
 #define nl O endl
-
-template <typename T> void on(T t) { std::cout << t << std::endl; }
-template<typename T, typename... Args>void on(T t, Args... args) { O t << " ";on(args...);nl; }
-
 #define os(x) {O x<<" ";}
 #define yes on("YES")
 #define no on("NO")
 #define yn(x) ((x)?"YES":"NO")
 #define oyn(x) on(yn(x)) 
-
+template <typename T> void on(T t) { std::cout << t << std::endl; }
+template<typename T, typename... Args>void on(T t, Args... args) { O t << " ";on(args...);nl; }
 #define ALL(x) x.bg,x.ed
 #define CLR(x) memset(x,0,sizeof(x))
 #define FIND(x,y) find(ALL(x),y)
@@ -74,12 +70,11 @@ template<typename T, typename... Args>void on(T t, Args... args) { O t << " ";on
 #define SORT(x) sort(ALL(x))
 #define REV(x) reverse(ALL(x))
 #define SUM(x) accumulate(ALL(x), 0)
-
+// input
 #define I in>>
 #define iv(...)   GET_MACRO2(__VA_ARGS__,iv_2,iv_1)(__VA_ARGS__)
-#define iv_1(v)   ll PP_CAT(v,n);I PP_CAT(v,n);vec<ll>v(PP_CAT(v,n));fl(i,v){I i;}
+#define iv_1(v)   ll PP_CAT(v,n);I PP_CAT(v,n);vi v(PP_CAT(v,n));fl(i,v){I i;}
 #define iv_2(v,n) vec<ll>v(n);fl(i,v){I i;}
-
 #define ints_1(a) ll a; I a;
 #define ints_2(a,b) ll a,b; I a>>b;
 #define ints_3(a,b,c) ll a,b,c;I a>>b>>c;
@@ -87,9 +82,26 @@ template<typename T, typename... Args>void on(T t, Args... args) { O t << " ";on
 #define ints_5(a,b,c,d,e) ll a,b,c,d,e; I a>>b>>c>>d>>e;
 #define ints_6(a,b,c,d,e,f) ll a,b,c,d,e,f; I a>>b>>c>>d>>e>>f;
 #define ints(...) GET_MACRO6(__VA_ARGS__,ints_6,ints_5,ints_4,ints_3,ints_2,ints_1)(__VA_ARGS__)
-
+// fix cpp devs work
 ll gcd(ll a, ll b) { ret b ? gcd(b, a % b) : a; }ll lcm(ll a, ll b) { ret(a * b / gcd(a, b)); }
-size_t off = 0;bool debo = false;template<typename Char, typename Traits, typename Allocator> basic_string<Char, Traits, Allocator> operator *(const basic_string<Char, Traits, Allocator> s, size_t n) { basic_string<Char, Traits, Allocator> tmp = "";  for (size_t i = 0; i < n; ++i) { tmp += s; }  return tmp; }template<typename Char, typename Traits, typename Allocator> basic_string<Char, Traits, Allocator> operator *(size_t n, const basic_string<Char, Traits, Allocator>& s) { return s * n; }template<typename T> std::ostream& outContainer(std::ostream& ot, T& v, bool isf) { if (debo)(ot << "[");if (!isf) { off += 2; nl; };int t = v.size();fl(i, v) { if (!isf && debo) ot << str(off, ' ');ot << i;if (--t) { ot << " ";if (!isf) nl; } }if (!isf) { off -= 2; };if (!isf) nl;if (!isf && debo) ot << str(off, ' ');if (debo) { ot << "]"; }return ot; }template <typename T> std::ostream& operator<< (std::ostream& ot, const std::vector<T>& v) { return outContainer(ot, v, is_fundamental<T>::value); }template <typename T> std::ostream& operator<< (std::ostream& ot, const std::list<T>& v) { return outContainer(ot, v, is_fundamental<T>::value); }template <typename T> std::ostream& operator<< (std::ostream& ot, const std::deque<T>& v) { return outContainer(ot, v, is_fundamental<T>::value); }template <typename T> std::ostream& operator<< (std::ostream& ot, const std::queue<T>& q) { std::vector<int> v; std::queue<T> qc = q; while (!qc.empty()) { v.push_back(qc.front()); qc.pop(); }return operator<<(ot, v); }template <typename T> std::ostream& operator<< (std::ostream& ot, const std::stack<T>& st) { std::vector<int> v; std::stack<T> stc = st; while (!stc.empty()) { v.push_back(stc.top()); stc.pop(); } REV(v); return operator<<(ot, v); }template <typename T> std::ostream& operator<< (std::ostream& ot, const std::set<T>& v) { return outContainer(ot, v, is_fundamental<T>::value); }template <typename T> std::ostream& operator<< (std::ostream& ot, const std::multiset<T>& v) { return outContainer(ot, v, is_fundamental<T>::value); }template <typename T> std::ostream& operator<< (std::ostream& ot, const std::unordered_set<T>& v) { return outContainer(ot, v, is_fundamental<T>::value); }template <typename T> std::ostream& operator<< (std::ostream& ot, const std::unordered_multiset<T>& v) { return outContainer(ot, v, is_fundamental<T>::value); }template <typename T, typename T2> std::ostream& operator<< (std::ostream& ot, const std::map<T, T2>& v) { return outContainer(ot, v, false); }template <typename T, typename T2> std::ostream& operator<< (std::ostream& ot, const std::multimap<T, T2>& v) { return outContainer(ot, v, false); }template <typename T, typename T2> std::ostream& operator<< (std::ostream& ot, const std::unordered_map<T, T2>& v) { return outContainer(ot, v, false); }template <typename T, typename T2> std::ostream& operator<< (std::ostream& ot, const std::unordered_multimap<T, T2>& v) { return outContainer(ot, v, false); }template <typename T1, typename T2> std::ostream& operator<< (std::ostream& ot, const std::pair<T1, T2>& p) { ot << (debo ? "(" : "") << p.first << " " << p.second << (debo ? ")" : "");return ot; }
+size_t off = 0;bool debo = false;
+template<typename Char, typename Traits, typename Allocator> basic_string<Char, Traits, Allocator> operator *(const basic_string<Char, Traits, Allocator> s, size_t n) { basic_string<Char, Traits, Allocator> tmp = "";  for (size_t i = 0; i < n; ++i) { tmp += s; }  return tmp; }
+template<typename Char, typename Traits, typename Allocator> basic_string<Char, Traits, Allocator> operator *(size_t n, const basic_string<Char, Traits, Allocator>& s) { return s * n; }
+template<typename T> std::ostream& outContainer(std::ostream& ot, T& v, bool isf) { if (debo)(ot << "[");if (!isf) { off += 2; nl; };int t = v.size();fl(i, v) { if (!isf && debo) ot << str(off, ' ');ot << i;if (--t) { ot << " ";if (!isf) nl; } }if (!isf) { off -= 2; };if (!isf) nl;if (!isf && debo) ot << str(off, ' ');if (debo) { ot << "]"; }return ot; }
+template <typename T> std::ostream& operator<< (std::ostream& ot, const std::vector<T>& v) { return outContainer(ot, v, is_fundamental<T>::value); }
+template <typename T> std::ostream& operator<< (std::ostream& ot, const std::list<T>& v) { return outContainer(ot, v, is_fundamental<T>::value); }
+template <typename T> std::ostream& operator<< (std::ostream& ot, const std::deque<T>& v) { return outContainer(ot, v, is_fundamental<T>::value); }
+template <typename T> std::ostream& operator<< (std::ostream& ot, const std::queue<T>& q) { std::vector<int> v; std::queue<T> qc = q; while (!qc.empty()) { v.push_back(qc.front()); qc.pop(); }return operator<<(ot, v); }
+template <typename T> std::ostream& operator<< (std::ostream& ot, const std::stack<T>& st) { std::vector<int> v; std::stack<T> stc = st; while (!stc.empty()) { v.push_back(stc.top()); stc.pop(); } REV(v); return operator<<(ot, v); }
+template <typename T> std::ostream& operator<< (std::ostream& ot, const std::set<T>& v) { return outContainer(ot, v, is_fundamental<T>::value); }
+template <typename T> std::ostream& operator<< (std::ostream& ot, const std::multiset<T>& v) { return outContainer(ot, v, is_fundamental<T>::value); }
+template <typename T> std::ostream& operator<< (std::ostream& ot, const std::unordered_set<T>& v) { return outContainer(ot, v, is_fundamental<T>::value); }
+template <typename T> std::ostream& operator<< (std::ostream& ot, const std::unordered_multiset<T>& v) { return outContainer(ot, v, is_fundamental<T>::value); }
+template <typename T, typename T2> std::ostream& operator<< (std::ostream& ot, const std::map<T, T2>& v) { return outContainer(ot, v, false); }
+template <typename T, typename T2> std::ostream& operator<< (std::ostream& ot, const std::multimap<T, T2>& v) { return outContainer(ot, v, false); }
+template <typename T, typename T2> std::ostream& operator<< (std::ostream& ot, const std::unordered_map<T, T2>& v) { return outContainer(ot, v, false); }
+template <typename T, typename T2> std::ostream& operator<< (std::ostream& ot, const std::unordered_multimap<T, T2>& v) { return outContainer(ot, v, false); }
+template <typename T1, typename T2> std::ostream& operator<< (std::ostream& ot, const std::pair<T1, T2>& p) { ot << (debo ? "(" : "") << p.first << " " << p.second << (debo ? ")" : "");return ot; }
 
 struct DebugDude { bool b = false; }; DebugDude DDT;struct OutDude {}; OutDude ODT;template<typename T>DebugDude& operator<< (DebugDude& d, T x) { if (!DBG) ret d;O  GREEN << x << RESET << "\n";d.b = true;ret d; }template<typename T>OutDude& operator<< (OutDude& d, T x) { O x << "\n";ret d; }
 #define db DDT.b=0;DDT<< 
