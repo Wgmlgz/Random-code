@@ -23,6 +23,7 @@ ifstream fin("deb_in.txt");
 #else
 #define in cin
 #endif
+const int MOD = 1'000'000'007;const int INF = 2'000'000'000;
 #define out cout
 #define ll int64_t
 #define int int64_t
@@ -111,7 +112,7 @@ template<typename T>OutDude& operator<< (OutDude& d, T x) { O x << "\n";ret d; }
 #define deb_5(a,b,c,d,e) {if(DBG){O GREEN<<#a<<"="<<a<<"  "<<#b<<"="<<b<<"  "<<#c<<"="<<c<<"  "<<#d<<"="<<d<<"  "<<#e<<"="<<e<<RESET;nl;}}
 #define deb_6(a,b,c,d,e,f) {if(DBG){O GREEN<<#a<<"="<<a<<"  "<<#b<<"="<<b<<"  "<<#c<<"="<<c<<"  "<<#d<<"="<<d<<"  "<<#e<<"="<<e<<"  "<<#f<<"="<<f<<RESET;nl;}}
 #define deb(...) GET_MACRO6(__VA_ARGS__,deb_6,deb_5,deb_4,deb_3,deb_2,deb_1)(__VA_ARGS__)
-const int MOD = 1'000'000'007;const int INF = 2'000'000'000;void preSolve();void solve(int TT);
+void preSolve();void solve(int TT);
 #if MANY_TESTS
 signed main() { ios_base::sync_with_stdio(0), in.tie(0), cout.tie(0);db "test";preSolve();int t = 1;in >> t;fo(i, t) { if (DBG) { out << YELLOW << " __ " << (i + 1) << " __\n" << RESET; }solve(t); } }
 #else
@@ -119,9 +120,6 @@ signed main() { ios_base::sync_with_stdio(0), in.tie(0), cout.tie(0);preSolve();
 #endif
 #pragma endregion
 void preSolve() {}
-
-
-
 
 void solve(int TT) {
 
