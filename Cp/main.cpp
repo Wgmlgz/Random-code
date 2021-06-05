@@ -1,11 +1,12 @@
 #define DBG 1
-#define MANY_TESTS 0
+#define MANY_TESTS 1
 
 #pragma region
 // bruh template for cp by Wgmlgz ver 0.6
 #include <bits/stdc++.h>
 using namespace std;
 #ifdef ONLINE_JUDGE
+#undef DBG
 #define DBG 0
 #endif
 #define RESET   "\033[0m"
@@ -104,7 +105,7 @@ template <typename T1,typename T2> ostream& operator<< (ostream& ot, const pair<
 struct DebugDude { bool b = false; }; DebugDude DDT;struct OutDude {}; OutDude ODT;template<typename T>DebugDude& operator<< (DebugDude& d, T x) { if (!DBG) ret d;O  GREEN << x << RESET << "\n";debo=0;d.b = true;ret d; }
 template<typename T>OutDude& operator<< (OutDude& d, T x) { O x << "\n";ret d; }
 #define db debo=1;DDT.b=0;DDT<< 
-#define o ODT<< 
+#define o debo=0;ODT<< 
 #define deb_1(a) {if(DBG){debo=1;O GREEN<<#a<<"="<<(a)<<RESET;nl;}}
 #define deb_2(a,b) {if(DBG){debo=1;O GREEN<<#a<<"="<<(a)<<"  "<<#b<<"="<<(b)<<RESET;nl;}}
 #define deb_3(a,b,c) {if(DBG){debo=1;O GREEN<<#a<<"="<<(a)<<"  "<<#b<<"="<<(b)<<"  "<<#c<<"="<<(c)<<RESET;nl;}}
@@ -116,11 +117,11 @@ template<typename T>OutDude& operator<< (OutDude& d, T x) { O x << "\n";ret d; }
 #define elif else if
 #define ins .insert
 #define DUDE(name) template<typename T> 
-template<typename T>  T&operator>(vector<T>v,size_t i){ret v[i];}
-template<typename T>  T&operator>(basic_string<T>v,size_t i){ret v[i];}
+template<typename T>  T&operator>(vector<T>&v,size_t i){ret v[i];}
+template<typename T>  T&operator>(basic_string<T>&v,size_t i){ret v[i];}
 template<typename T> void operator^(set<T>v,T i){v.insert(i);}
-template<typename T1,typename T2>T2&operator|(map<T1,T2>v,T1 i){ret v[i];}
-template<typename T1,typename T2>T2&operator|(hmap<T1,T2>v,T1 i){ret v[i];}
+template<typename T1,typename T2>T2&operator|(map<T1,T2>&v,T1 i){ret v[i];}
+template<typename T1,typename T2>T2&operator|(hmap<T1,T2>&v,T1 i){ret v[i];}
 #define ev &1==0
 #define od &1
 #define di -'0'
@@ -131,9 +132,6 @@ template<typename T1,typename T2>T2&operator|(hmap<T1,T2>v,T1 i){ret v[i];}
 
 void preSolve();void solve(int);
 void postSolve() {
-#ifdef DBG
-cerr <<CYAN<< "finished in " << clock() * 1.0 / CLOCKS_PER_SEC << " sec" << endl;
-#endif
 }
 #if MANY_TESTS
 
