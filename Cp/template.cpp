@@ -2,8 +2,7 @@
 #define MANY_TESTS 0
 
 #pragma region
-// bruh tp for cp by Wgmlgz ver 0.6
-// i think my c++ code slowly goes to python...
+// bruh template for cp by Wgmlgz ver 0.6
 #include <bits/stdc++.h>
 using namespace std;
 #ifdef ONLINE_JUDGE
@@ -19,9 +18,6 @@ using namespace std;
 #define CYAN    "\033[36m"   
 #define WHITE   "\033[37m"    
 #if DBG
-#define tp template
-#define tn typename
-#define tT tp<tn T> 
 ifstream fin("deb_in.txt");
 #define in fin
 #else
@@ -37,6 +33,7 @@ typedef pair<ll, ll> pii;
 typedef vec<ll> vi;
 typedef vec<pii> vpii;
 typedef vec<vi> vvi;
+typedef set<ll> si;
 #define hmap unordered_map
 #define hset unordered_set
 #define GET_MACRO6(_1,_2,_3,_4,_5,_6,NAME,...) NAME
@@ -50,8 +47,14 @@ typedef vec<vi> vvi;
 #define F first
 #define S second
 #define ret return
-#define fl(i,x) for(auto& i:x)
-#define flc(i,x) for(auto i:x)
+#define fl_1(x) for(auto&i:x)
+#define fl_2(i,x) for(auto&i:x)
+#define fl(...) GET_MACRO2(__VA_ARGS__,fl_2,fl_1)(__VA_ARGS__)
+
+#define flc_1(x) for(auto i:x)
+#define flc_2(i,x) for(auto i:x)
+#define flc(...) GET_MACRO2(__VA_ARGS__,flc_2,flc_1)(__VA_ARGS__)
+
 #define fo_1(n) for(ll PP_CAT(n,i)=0;PP_CAT(n,i)<n;PP_CAT(n,i)++)
 #define fo_2(i,n) for(ll i=0;i<n;i++)
 #define fo_3(i,k,n) for(ll i=k;k<n?i<n:i>n;k<n?++i:--i)
@@ -64,9 +67,9 @@ typedef vec<vi> vvi;
 #define no on("NO")
 #define yn(x) ((x)?"YES":"NO")
 #define oyn(x) on(yn(x)) 
-tp <tn T> void on(T t) { cout << t << endl; }
-tp<tn T, tn... Args>void on(T t, Args... args) { O t << " ";on(args...);nl; }
-#define ALL(x) x.bg,x.ed
+template <typename T> void on(T t) { cout << t << endl; }
+template<typename T, typename... Args>void on(T t, Args... args) { O t << " ";on(args...);nl; }
+#define ALL(x) (x).bg,(x).ed
 #define CLR(x) memset(x,0,sizeof(x))
 #define FIND(x,y) find(ALL(x),y)
 #define IN(x,y) (FIND(x,(y))!=x.ed)
@@ -89,50 +92,59 @@ int fact(int n) { if (n >= MOD)ret 0;int result = 1;for (int i = 1; i <= n; i++)
 #define bits_2(a,b) bitset<b>(a).to_string()
 #define bits(...) GET_MACRO2(__VA_ARGS__,bits_2,bits_1)(__VA_ARGS__)
 size_t off = 0;bool debo = false;
-tp<tn Char, tn Traits, tn Allocator> basic_string<Char, Traits, Allocator> operator *(const basic_string<Char, Traits, Allocator> s, size_t n) { basic_string<Char, Traits, Allocator> tmp = "";  for (size_t i = 0; i < n; ++i) { tmp += s; }  ret tmp; }
-tp<tn Char, tn Traits, tn Allocator> basic_string<Char, Traits, Allocator> operator *(size_t n, const basic_string<Char, Traits, Allocator>& s) { ret s * n; }
-tT ostream& outContainer(ostream& ot, T& v, bool isf) { if (debo)(ot << "[");if (!isf) { off += 2; nl; };int t = v.size();fl(i, v) { if (!isf && debo) ot << str(off, ' ');ot << i;if (--t) { ot << " ";if (!isf) nl; } }if (!isf) { off -= 2; };if (!isf) nl;if (!isf && debo) ot << str(off, ' ');if (debo) { ot << "]"; }ret ot; }
-#define STLCOUT(nm) tT ostream& operator<< (ostream& ot, const nm<T>& v) { ret outContainer(ot, v, is_fundamental<T>::value); }
-#define STLCOUTP(nm) tp <tn T,tn T2> ostream& operator<< (ostream& ot, const nm<T, T2>& v) { ret outContainer(ot, v, false); }
+template<typename Char, typename Traits, typename Allocator> basic_string<Char, Traits, Allocator> operator *(const basic_string<Char, Traits, Allocator> s, size_t n) { basic_string<Char, Traits, Allocator> tmp = "";  for (size_t i = 0; i < n; ++i) { tmp += s; }  ret tmp; }
+template<typename Char, typename Traits, typename Allocator> basic_string<Char, Traits, Allocator> operator *(size_t n, const basic_string<Char, Traits, Allocator>& s) { ret s * n; }
+template<typename T>  ostream& outContainer(ostream& ot, T& v, bool isf) { if (debo)(ot << "[");if (!isf) { off += 2; nl; };int t = v.size();fl(i, v) { if (!isf && debo) ot << str(off, ' ');ot << i;if (--t) { ot << " ";if (!isf) nl; } }if (!isf) { off -= 2; };if (!isf) nl;if (!isf && debo) ot << str(off, ' ');if (debo) { ot << "]"; }ret ot; }
+#define STLCOUT(nm) template<typename T>  ostream& operator<< (ostream& ot, const nm<T>& v) { ret outContainer(ot, v, is_fundamental<T>::value); }
+#define STLCOUTP(nm) template <typename T,typename T2> ostream& operator<< (ostream& ot, const nm<T, T2>& v) { ret outContainer(ot, v, false); }
 STLCOUTP(map);STLCOUTP(multimap);STLCOUTP(unordered_map);STLCOUTP(unordered_multimap);STLCOUT(list);STLCOUT(set);STLCOUT(deque);STLCOUT(multiset);STLCOUT(unordered_set);STLCOUT(unordered_multiset);STLCOUT(vector);
-tT ostream& operator<< (ostream& ot, const queue<T>& q) { vector<int> v; queue<T> qc = q; while (!qc.empty()) { v.push_back(qc.front()); qc.pop(); }ret operator<<(ot, v); }
-tT ostream& operator<< (ostream& ot, const stack<T>& st) { vector<int> v; stack<T> stc = st; while (!stc.empty()) { v.push_back(stc.top()); stc.pop(); } REV(v); ret operator<<(ot, v); }
-tp <tn T1,tn T2> ostream& operator<< (ostream& ot, const pair<T1, T2>& p) { ot << (debo ? "(" : "") << p.first << " " << p.second << (debo ? ")" : "");ret ot; }
-struct DebugDude { bool b = false; }; DebugDude DDT;struct OutDude {}; OutDude ODT;tp<tn T>DebugDude& operator<< (DebugDude& d, T x) { if (!DBG) ret d;O  GREEN << x << RESET << "\n";d.b = true;ret d; }
-tp<tn T>OutDude& operator<< (OutDude& d, T x) { O x << "\n";ret d; }
-#define db DDT.b=0;DDT<< 
+template<typename T>  ostream& operator<< (ostream& ot, const queue<T>& q) { vector<int> v; queue<T> qc = q; while (!qc.empty()) { v.push_back(qc.front()); qc.pop(); }ret operator<<(ot, v); }
+template<typename T>  ostream& operator<< (ostream& ot, const stack<T>& st) { vector<int> v; stack<T> stc = st; while (!stc.empty()) { v.push_back(stc.top()); stc.pop(); } REV(v); ret operator<<(ot, v); }
+template <typename T1,typename T2> ostream& operator<< (ostream& ot, const pair<T1, T2>& p) { ot << (debo ? "(" : "") << p.first << " " << p.second << (debo ? ")" : "");ret ot; }
+struct DebugDude { bool b = false; }; DebugDude DDT;struct OutDude {}; OutDude ODT;template<typename T>DebugDude& operator<< (DebugDude& d, T x) { if (!DBG) ret d;O  GREEN << x << RESET << "\n";debo=0;d.b = true;ret d; }
+template<typename T>OutDude& operator<< (OutDude& d, T x) { O x << "\n";ret d; }
+#define db debo=1;DDT.b=0;DDT<< 
 #define o ODT<< 
-#define deb_1(a) {if(DBG){O GREEN<<#a<<"="<<a<<RESET;nl;}}
-#define deb_2(a,b) {if(DBG){O GREEN<<#a<<"="<<a<<"  "<<#b<<"="<<b<<RESET;nl;}}
-#define deb_3(a,b,c) {if(DBG){O GREEN<<#a<<"="<<a<<"  "<<#b<<"="<<b<<"  "<<#c<<"="<<c<<RESET;nl;}}
-#define deb_4(a,b,c,d) {if(DBG){O GREEN<<#a<<"="<<a<<"  "<<#b<<"="<<b<<"  "<<#c<<"="<<c<<"  "<<#d<<"="<<d<<RESET;nl;}}
-#define deb_5(a,b,c,d,e) {if(DBG){O GREEN<<#a<<"="<<a<<"  "<<#b<<"="<<b<<"  "<<#c<<"="<<c<<"  "<<#d<<"="<<d<<"  "<<#e<<"="<<e<<RESET;nl;}}
-#define deb_6(a,b,c,d,e,f) {if(DBG){O GREEN<<#a<<"="<<a<<"  "<<#b<<"="<<b<<"  "<<#c<<"="<<c<<"  "<<#d<<"="<<d<<"  "<<#e<<"="<<e<<"  "<<#f<<"="<<f<<RESET;nl;}}
+#define deb_1(a) {if(DBG){debo=1;O GREEN<<#a<<"="<<(a)<<RESET;nl;}}
+#define deb_2(a,b) {if(DBG){debo=1;O GREEN<<#a<<"="<<(a)<<"  "<<#b<<"="<<(b)<<RESET;nl;}}
+#define deb_3(a,b,c) {if(DBG){debo=1;O GREEN<<#a<<"="<<(a)<<"  "<<#b<<"="<<(b)<<"  "<<#c<<"="<<(c)<<RESET;nl;}}
+#define deb_4(a,b,c,d) {if(DBG){debo=1;O GREEN<<#a<<"="<<a<<"  "<<#b<<"="<<b<<"  "<<#c<<"="<<c<<"  "<<#d<<"="<<d<<RESET;nl;}}
+#define deb_5(a,b,c,d,e) {if(DBG){debo=1;O GREEN<<#a<<"="<<a<<"  "<<#b<<"="<<b<<"  "<<#c<<"="<<c<<"  "<<#d<<"="<<d<<"  "<<#e<<"="<<e<<RESET;nl;}}
+#define deb_6(a,b,c,d,e,f) {if(DBG){debo=1;O GREEN<<#a<<"="<<a<<"  "<<#b<<"="<<b<<"  "<<#c<<"="<<c<<"  "<<#d<<"="<<d<<"  "<<#e<<"="<<e<<"  "<<#f<<"="<<f<<RESET;nl;}}
 #define deb(...) GET_MACRO6(__VA_ARGS__,deb_6,deb_5,deb_4,deb_3,deb_2,deb_1)(__VA_ARGS__)
-// some illegal stuff
-#define fi if(
-#define ff ) {
-#define ef }else if
-#define e }
-#define fr for(
 #define ct continue
-#define DUDE(name) tT
-tT T&operator/(vector<T>v,size_t i){ret v[i];}
-tp<tn T1,tn T2>T2&operator/(map<T1,T2>v,T1 i){ret v[i];}
-tp<tn T1,tn T2>T2&operator/(hmap<T1,T2>v,T1 i){ret v[i];}
+#define elif else if
+#define ins .insert
+#define DUDE(name) template<typename T> 
+template<typename T>  T&operator>(vector<T>v,size_t i){ret v[i];}
+template<typename T>  T&operator>(basic_string<T>v,size_t i){ret v[i];}
+template<typename T> void operator^(set<T>v,T i){v.insert(i);}
+template<typename T1,typename T2>T2&operator|(map<T1,T2>v,T1 i){ret v[i];}
+template<typename T1,typename T2>T2&operator|(hmap<T1,T2>v,T1 i){ret v[i];}
 #define ev &1==0
 #define od &1
-void preSolve();void solve(int TT);
+#define di -'0'
+#define let -'a'
+#define LET -'A'
+#define fn(name, rt, p1) template<typename T> rt name(T p1) { 
+#define pr(name, p1) template<typename T> void name(T p1) { 
+
+void preSolve();void solve(int);
+void postSolve() {
+#ifdef DBG
+cerr <<CYAN<< "finished in " << clock() * 1.0 / CLOCKS_PER_SEC << " sec" << endl;
+#endif
+}
 #if MANY_TESTS
-signed main() { ios_base::sync_with_stdio(0), in.tie(0), out.tie(0);db "test";preSolve();int t = 1;in >> t;fo(i, t) { if (DBG) { out << YELLOW << " __ " << (i + 1) << " __\n" << RESET; }solve(t); } }
+
+signed main() { ios_base::sync_with_stdio(0), in.tie(0), out.tie(0);db "test";preSolve();int t = 1;in >> t;fo(i, t) { if (DBG) { out << YELLOW << " __ " << (i + 1) << " __\n" << RESET; }solve(t); } postSolve();}
 #else
-signed main() { ios_base::sync_with_stdio(0), in.tie(0), out.tie(0);preSolve();solve(0); }
+signed main() { ios_base::sync_with_stdio(0), in.tie(0), out.tie(0);preSolve();solve(0); postSolve();}
 #endif
 #pragma endregion
 void preSolve() {}
 
 
-
 void solve(int TT) {
-
+  
 }
