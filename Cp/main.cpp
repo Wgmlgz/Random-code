@@ -9,23 +9,25 @@ using namespace std;
 #undef DBG
 #define DBG 0
 #endif
-#define RESET   "\033[0m"
-#define BLACK   "\033[30m"    
-#define RED     "\033[31m"  
-#define GREEN   "\033[32m"    
-#define YELLOW  "\033[33m" 
-#define BLUE    "\033[34m"   
-#define MAGENTA "\033[35m"   
-#define CYAN    "\033[36m"   
-#define WHITE   "\033[37m"    
+string RESET = "\033[0m";
+string BLACK = "\033[30m";
+string RED = "\033[31m";
+string GREEN = "\033[32m";
+string YELLOW = "\033[33m";
+string BLUE = "\033[34m";
+string MAGENTA = "\033[35m";
+string CYAN = "\033[36m";
+string WHITE = "\033[37m";
 #if DBG
 ifstream fin("deb_in.txt");
+//ofstream fout("deb_out.txt");
 #define in fin
+#define out cout
 #else
 #define in cin
+#define out cout
 #endif
 const int MOD = 1'000'000'007;const int INF = 2'000'000'000;
-#define out cout
 #define ll int64_t
 #define int int64_t
 #define vec vector
@@ -63,12 +65,12 @@ typedef set<ll> si;
 #define fo(...) GET_MACRO4(__VA_ARGS__,fo_4,fo_3,fo_2,fo_1)(__VA_ARGS__)
 #define O out<<
 #define nl O endl
-#define os(x) {O x<<" ";}
+#define os(x) {O (x)<<" ";}
 #define yes on("YES")
 #define no on("NO")
 #define yn(x) ((x)?"YES":"NO")
 #define oyn(x) on(yn(x)) 
-template <typename T> void on(T t) { cout << t << endl; }
+template <typename T> void on(T t) { out << t << endl; }
 template<typename T, typename... Args>void on(T t, Args... args) { O t << " ";on(args...);nl; }
 #define ALL(x) (x).bg,(x).ed
 #define CLR(x) memset(x,0,sizeof(x))
@@ -92,17 +94,20 @@ int fact(int n) { if (n >= MOD)ret 0;int result = 1;for (int i = 1; i <= n; i++)
 #define bits_1(a) bitset<32>(a).to_string()
 #define bits_2(a,b) bitset<b>(a).to_string()
 #define bits(...) GET_MACRO2(__VA_ARGS__,bits_2,bits_1)(__VA_ARGS__)
-size_t off = 0;bool debo = false;
+
 template<typename Char, typename Traits, typename Allocator> basic_string<Char, Traits, Allocator> operator *(const basic_string<Char, Traits, Allocator> s, size_t n) { basic_string<Char, Traits, Allocator> tmp = "";  for (size_t i = 0; i < n; ++i) { tmp += s; }  ret tmp; }
-template<typename Char, typename Traits, typename Allocator> basic_string<Char, Traits, Allocator> operator *(size_t n, const basic_string<Char, Traits, Allocator>& s) { ret s * n; }
-template<typename T>  ostream& outContainer(ostream& ot, T& v, bool isf) { if (debo)(ot << "[");if (!isf) { off += 2; nl; };int t = v.size();fl(i, v) { if (!isf && debo) ot << str(off, ' ');ot << i;if (--t) { ot << " ";if (!isf) nl; } }if (!isf) { off -= 2; };if (!isf) nl;if (!isf && debo) ot << str(off, ' ');if (debo) { ot << "]"; }ret ot; }
-#define STLCOUT(nm) template<typename T>  ostream& operator<< (ostream& ot, const nm<T>& v) { ret outContainer(ot, v, is_fundamental<T>::value); }
-#define STLCOUTP(nm) template <typename T,typename T2> ostream& operator<< (ostream& ot, const nm<T, T2>& v) { ret outContainer(ot, v, false); }
-STLCOUTP(map);STLCOUTP(multimap);STLCOUTP(unordered_map);STLCOUTP(unordered_multimap);STLCOUT(list);STLCOUT(set);STLCOUT(deque);STLCOUT(multiset);STLCOUT(unordered_set);STLCOUT(unordered_multiset);STLCOUT(vector);
-template<typename T>  ostream& operator<< (ostream& ot, const queue<T>& q) { vector<int> v; queue<T> qc = q; while (!qc.empty()) { v.push_back(qc.front()); qc.pop(); }ret operator<<(ot, v); }
-template<typename T>  ostream& operator<< (ostream& ot, const stack<T>& st) { vector<int> v; stack<T> stc = st; while (!stc.empty()) { v.push_back(stc.top()); stc.pop(); } REV(v); ret operator<<(ot, v); }
-template <typename T1,typename T2> ostream& operator<< (ostream& ot, const pair<T1, T2>& p) { ot << (debo ? "(" : "") << p.first << " " << p.second << (debo ? ")" : "");ret ot; }
-struct DebugDude { bool b = false; }; DebugDude DDT;struct OutDude {}; OutDude ODT;template<typename T>DebugDude& operator<< (DebugDude& d, T x) { if (!DBG) ret d;O  GREEN << x << RESET << "\n";debo=0;d.b = true;ret d; }
+template<typename Char, typename Traits, typename Allocator> basic_string<Char, Traits, Allocator> operator *(size_t n, const basic_string<Char, Traits, Allocator>& s) { ret s* n; }
+
+size_t off = 0;bool debo = 1; bool indexing = 1;
+template <typename T1, typename T2> ostream& operator<< (ostream& ot, const pair<T1, T2>& p) { ot << (debo ? "{" : "") << p.first << " " << p.second << (debo ? "}" : "");return ot; }
+template <typename T, typename T2>ostream& outContainer(ostream& ot, const T& v, bool isf, bool is_index = false, function<void(const T2&)>printer = [](const T2& da) {cout << da;}) { if (debo)(ot << "[");if (!isf) { off += 2;ot << endl; }int t = v.size(), id = 0;for (auto& i : v) { if (isf) { if (id)ot << " ";printer(i); } else { if (debo)ot << string(off, ' ');if (is_index && indexing)ot << id << ":";printer(i);ot << endl; }++id; }if (!isf)off -= 2;if (!isf && debo)ot << string(off, ' ');if (debo)ot << "]";return ot; }
+#define STLCOUT(nm, index) template<typename T>  ostream & operator<< (ostream & ot, const nm<T> & v) {return outContainer<nm<T>, T>(ot, v, (is_fundamental<T>::value or v.size() <= 1), index);}
+#define STLCOUTP(nm) template <typename T1, typename T2>ostream& operator<< (ostream& ot, const nm<T1, T2>& v) {return outContainer<nm<T1, T2>, pair<T1, T2>>(ot, v, v.size() <= 1, 0, [](const pair < T1, T2>& da) { cout << da.first << (debo?":":" ") << da.second;});}
+STLCOUTP(map);STLCOUTP(multimap);STLCOUTP(unordered_map);STLCOUTP(unordered_multimap);STLCOUT(list, 0);STLCOUT(set, 0);STLCOUT(deque, 1);STLCOUT(multiset, 0);STLCOUT(unordered_set, 0);STLCOUT(unordered_multiset, 0);STLCOUT(vector, 1);
+template<typename T> ostream& operator<< (ostream& ot, const queue<T>& q) { vector<int> v; queue<T> qc = q; while (!qc.empty()) { v.push_back(qc.front()); qc.pop(); }return operator<<(ot, v); }
+template<typename T> ostream& operator<< (ostream& ot, const stack<T>& st) { vector<int> v; stack<T> stc = st; while (!stc.empty()) { v.push_back(stc.top()); stc.pop(); } reverse(v.begin(), v.end()); return operator<<(ot, v); }
+
+struct DebugDude { bool b = false; }; DebugDude DDT;struct OutDude {}; OutDude ODT;template<typename T>DebugDude& operator<< (DebugDude& d, T& x) { if (!DBG) ret d;out << GREEN << x << RESET << "\n";debo = 0;d.b = true;ret d; }
 template<typename T>OutDude& operator<< (OutDude& d, T x) { O x << "\n";ret d; }
 #define db debo=1;DDT.b=0;DDT<< 
 #define o debo=0;ODT<< 
@@ -117,11 +122,9 @@ template<typename T>OutDude& operator<< (OutDude& d, T x) { O x << "\n";ret d; }
 #define elif else if
 #define ins .insert
 #define DUDE(name) template<typename T> 
-template<typename T>  T&operator>(vector<T>&v,size_t i){ret v[i];}
-template<typename T>  T&operator>(basic_string<T>&v,size_t i){ret v[i];}
-template<typename T> void operator^(set<T>v,T i){v.insert(i);}
-template<typename T1,typename T2>T2&operator|(map<T1,T2>&v,T1 i){ret v[i];}
-template<typename T1,typename T2>T2&operator|(hmap<T1,T2>&v,T1 i){ret v[i];}
+template<typename T>  T& operator>(vector<T>& v, size_t i) { ret v[i]; }
+template<typename T>  T& operator>(basic_string<T>& v, size_t i) { ret v[i]; }
+template<typename T> void operator^(set<T>v, T i) { v.insert(i); }
 #define ev &1==0
 #define od &1
 #define di -'0'
@@ -135,14 +138,13 @@ void postSolve() {
 }
 #if MANY_TESTS
 
-signed main() { ios_base::sync_with_stdio(0), in.tie(0), out.tie(0);db "test";preSolve();int t = 1;in >> t;fo(i, t) { if (DBG) { out << YELLOW << " __ " << (i + 1) << " __\n" << RESET; }solve(t); } postSolve();}
+signed main() { ios_base::sync_with_stdio(0), in.tie(0), out.tie(0);preSolve();int t = 1;in >> t;fo(i, t) { if (DBG) { out << YELLOW << " __ " << (i + 1) << " __\n" << RESET; }solve(t); } postSolve(); }
 #else
-signed main() { ios_base::sync_with_stdio(0), in.tie(0), out.tie(0);preSolve();solve(0); postSolve();}
+signed main() { ios_base::sync_with_stdio(0), in.tie(0), out.tie(0);preSolve();solve(0); postSolve(); }
 #endif
 #pragma endregion
 void preSolve() {}
 
-
 void solve(int TT) {
-  
+
 }
