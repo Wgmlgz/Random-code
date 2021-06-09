@@ -2,7 +2,7 @@
 #define MANY_TESTS 1
 
 #pragma region
-// bruh template for cp by Wgmlgz ver 0.6
+// bruh template for cp by Wgmlgz ver 0.7 https://github.com/Wgmlgz/Random-code/blob/main/Cp/template.cpp
 #include <bits/stdc++.h>
 using namespace std;
 #ifdef ONLINE_JUDGE
@@ -20,7 +20,6 @@ string CYAN = "\033[36m";
 string WHITE = "\033[37m";
 #if DBG
 ifstream fin("deb_in.txt");
-//ofstream fout("deb_out.txt");
 #define in fin
 #define out cout
 #else
@@ -53,11 +52,9 @@ typedef set<ll> si;
 #define fl_1(x) for(auto&i:x)
 #define fl_2(i,x) for(auto&i:x)
 #define fl(...) GET_MACRO2(__VA_ARGS__,fl_2,fl_1)(__VA_ARGS__)
-
 #define flc_1(x) for(auto i:x)
 #define flc_2(i,x) for(auto i:x)
 #define flc(...) GET_MACRO2(__VA_ARGS__,flc_2,flc_1)(__VA_ARGS__)
-
 #define fo_1(n) for(ll PP_CAT(n,i)=0;PP_CAT(n,i)<n;PP_CAT(n,i)++)
 #define fo_2(i,n) for(ll i=0;i<n;i++)
 #define fo_3(i,k,n) for(ll i=k;k<n?i<n:i>n;k<n?++i:--i)
@@ -94,10 +91,8 @@ int fact(int n) { if (n >= MOD)ret 0;int result = 1;for (int i = 1; i <= n; i++)
 #define bits_1(a) bitset<32>(a).to_string()
 #define bits_2(a,b) bitset<b>(a).to_string()
 #define bits(...) GET_MACRO2(__VA_ARGS__,bits_2,bits_1)(__VA_ARGS__)
-
 template<typename Char, typename Traits, typename Allocator> basic_string<Char, Traits, Allocator> operator *(const basic_string<Char, Traits, Allocator> s, size_t n) { basic_string<Char, Traits, Allocator> tmp = "";  for (size_t i = 0; i < n; ++i) { tmp += s; }  ret tmp; }
 template<typename Char, typename Traits, typename Allocator> basic_string<Char, Traits, Allocator> operator *(size_t n, const basic_string<Char, Traits, Allocator>& s) { ret s* n; }
-
 size_t off = 0;bool debo = 1; bool indexing = 1;
 template <typename T1, typename T2> ostream& operator<< (ostream& ot, const pair<T1, T2>& p) { ot << (debo ? "{" : "") << p.first << " " << p.second << (debo ? "}" : "");return ot; }
 template <typename T, typename T2>ostream& outContainer(ostream& ot, const T& v, bool isf, bool is_index = false, function<void(const T2&)>printer = [](const T2& da) {cout << da;}) { if (debo)(ot << "[");if (!isf) { off += 2;ot << endl; }int t = v.size(), id = 0;for (auto& i : v) { if (isf) { if (id)ot << " ";printer(i); } else { if (debo)ot << string(off, ' ');if (is_index && indexing)ot << id << ":";printer(i);ot << endl; }++id; }if (!isf)off -= 2;if (!isf && debo)ot << string(off, ' ');if (debo)ot << "]";return ot; }
@@ -106,7 +101,6 @@ template <typename T, typename T2>ostream& outContainer(ostream& ot, const T& v,
 STLCOUTP(map);STLCOUTP(multimap);STLCOUTP(unordered_map);STLCOUTP(unordered_multimap);STLCOUT(list, 0);STLCOUT(set, 0);STLCOUT(deque, 1);STLCOUT(multiset, 0);STLCOUT(unordered_set, 0);STLCOUT(unordered_multiset, 0);STLCOUT(vector, 1);
 template<typename T> ostream& operator<< (ostream& ot, const queue<T>& q) { vector<int> v; queue<T> qc = q; while (!qc.empty()) { v.push_back(qc.front()); qc.pop(); }return operator<<(ot, v); }
 template<typename T> ostream& operator<< (ostream& ot, const stack<T>& st) { vector<int> v; stack<T> stc = st; while (!stc.empty()) { v.push_back(stc.top()); stc.pop(); } reverse(v.begin(), v.end()); return operator<<(ot, v); }
-
 struct DebugDude { bool b = false; }; DebugDude DDT;struct OutDude {}; OutDude ODT;template<typename T>DebugDude& operator<< (DebugDude& d, T& x) { if (!DBG) ret d;out << GREEN << x << RESET << "\n";debo = 0;d.b = true;ret d; }
 template<typename T>OutDude& operator<< (OutDude& d, T x) { O x << "\n";ret d; }
 #define db debo=1;DDT.b=0;DDT<< 
@@ -125,25 +119,25 @@ template<typename T>OutDude& operator<< (OutDude& d, T x) { O x << "\n";ret d; }
 template<typename T>  T& operator>(vector<T>& v, size_t i) { ret v[i]; }
 template<typename T>  T& operator>(basic_string<T>& v, size_t i) { ret v[i]; }
 template<typename T> void operator^(set<T>v, T i) { v.insert(i); }
-#define ev &1==0
-#define od &1
-#define di -'0'
+#define eve %2==0
+#define odd %2
+#define dig -'0'
 #define let -'a'
 #define LET -'A'
 #define fn(name, rt, p1) template<typename T> rt name(T p1) { 
 #define pr(name, p1) template<typename T> void name(T p1) { 
-
 void preSolve();void solve(int);
-void postSolve() {
-}
+void postSolve() { if (DBG) O CYAN << "finished in " << clock() * 1.0 / CLOCKS_PER_SEC << " sec" << endl; }
 #if MANY_TESTS
-
 signed main() { ios_base::sync_with_stdio(0), in.tie(0), out.tie(0);preSolve();int t = 1;in >> t;fo(i, t) { if (DBG) { out << YELLOW << " __ " << (i + 1) << " __\n" << RESET; }solve(t); } postSolve(); }
 #else
 signed main() { ios_base::sync_with_stdio(0), in.tie(0), out.tie(0);preSolve();solve(0); postSolve(); }
 #endif
 #pragma endregion
 void preSolve() {}
+/* place for notes
+
+*/
 
 void solve(int TT) {
 
