@@ -2,8 +2,8 @@
 #define MANY_TESTS 1
 
 #pragma region
-// bruh template for cp by Wgmlgz ver 0.8 https://github.com/Wgmlgz/Random-code/blob/main/Cp/template.cpp
-const int MOD = 1'000'000'007;const int INF = 2'000'000'000;
+// bruh template for cp by Wgmlgz ver 0.9 https://github.com/Wgmlgz/Random-code/blob/main/Cp/template.cpp
+const int MOD = (int)1e+9 + 7;;const int INF = 1000 * 1000 * 1000;
 #include <bits/stdc++.h>
 using namespace std;
 #ifdef ONLINE_JUDGE
@@ -55,7 +55,8 @@ typedef string str;typedef pair<ll, ll> pii;typedef vec<ll> vi;typedef vec<pii> 
 #define yesr yes; return
 #define nor no; return
 #define yn(x) on(((x)?"YES":"NO")) 
-template <typename T> void on(T t) { out << t << endl; }template<typename T, typename... Args>void on(T t, Args... args) { O t << " ";on(args...);nl; }
+template <typename T> void on(T t) { out << t << endl; }
+template<typename T, typename... Args>void on(T t, Args... args) { O t << " ";on(args...);nl; }
 #define ALL(x) (x).bg,(x).ed
 #define CLR(x) memset(x,0,sizeof(x))
 #define FIND(x,y) find(ALL(x),y)
@@ -66,6 +67,7 @@ template <typename T> void on(T t) { out << t << endl; }template<typename T, typ
 #define I in>>
 #define it(type, name) type name;I name;
 #define iv(v,n) vec<ll>v(n);fl(i,v){I i;}
+#define im(v,n,m) vec<vec<int>>v(n, vec<int>(m));fl(i,v){fl(j,i)I j;}
 #define ints_1(a) ll a; I a;
 #define ints_2(a,b) ll a,b; I a>>b;
 #define ints_3(a,b,c) ll a,b,c;I a>>b>>c;
@@ -79,7 +81,7 @@ int fact(int n) { if (n >= MOD)ret 0;int result = 1;for (int i = 1; i <= n; i++)
 #define bits(...) GET_MACRO2(__VA_ARGS__,bits_2,bits_1)(__VA_ARGS__)
 template<typename Char, typename Traits, typename Allocator> basic_string<Char, Traits, Allocator> operator *(const basic_string<Char, Traits, Allocator> s, size_t n) { basic_string<Char, Traits, Allocator> tmp = "";  for (size_t i = 0; i < n; ++i) { tmp += s; }  ret tmp; }template<typename Char, typename Traits, typename Allocator> basic_string<Char, Traits, Allocator> operator *(size_t n, const basic_string<Char, Traits, Allocator>& s) { ret s* n; }
 size_t off = 0;bool debo = 1; bool indexing = 1;template <typename T1, typename T2> ostream& operator<< (ostream& ot, const pair<T1, T2>& p) { ot << (debo ? "{" : "") << p.first << " " << p.second << (debo ? "}" : "");return ot; }
-template <typename T, typename T2>ostream& outContainer(ostream& ot, const T& v, bool isf, bool is_index = false, function<void(const T2&)>printer = [](const T2& da) {cout << da;}) { if (debo)(ot << "[");if (!isf) { off += 2;ot << endl; }int t = v.size(), id = 0;for (auto& i : v) { if (isf) { if (id)ot << " ";printer(i); } else { if (debo)ot << string(off, ' ');if (is_index && indexing)ot << id << ":";printer(i);ot << endl; }++id; }if (!isf)off -= 2;if (!isf && debo)ot << string(off, ' ');if (debo)ot << "]";return ot; }
+template <typename T, typename T2>ostream& outContainer(ostream& ot, const T& v, bool isf, bool is_index = false, function<void(const T2&)>printer = [](const T2& da) {cout << da;}) { if (debo)(ot << "[");if (!isf) { off += 2;ot << endl; }int t = v.size(), id = 0;for (const auto& i : v) { if (isf) { if (id)ot << " ";printer(i); } else { if (debo)ot << string(off, ' ');if (is_index && indexing & debo)ot << id << ":";printer(i);ot << endl; }++id; }if (!isf)off -= 2;if (!isf && debo)ot << string(off, ' ');if (debo)ot << "]";return ot; }
 #define STLCOUT(nm, index) template<typename T>  ostream & operator<< (ostream & ot, const nm<T> & v) {return outContainer<nm<T>, T>(ot, v, (is_fundamental<T>::value or v.size() <= 1), index);}
 #define STLCOUTP(nm) template <typename T1, typename T2>ostream& operator<< (ostream& ot, const nm<T1, T2>& v) {return outContainer<nm<T1, T2>, pair<T1, T2>>(ot, v, v.size() <= 1, 0, [](const pair < T1, T2>& da) { cout << da.first << (debo?":":" ") << da.second;});}
 STLCOUTP(map);STLCOUTP(multimap);STLCOUTP(unordered_map);STLCOUTP(unordered_multimap);STLCOUT(list, 0);STLCOUT(set, 0);STLCOUT(deque, 1);STLCOUT(multiset, 0);STLCOUT(unordered_set, 0);STLCOUT(unordered_multiset, 0);STLCOUT(vector, 1);
@@ -110,16 +112,15 @@ signed main() { ios_base::sync_with_stdio(0), in.tie(0), out.tie(0);preSolve();i
 #else
 signed main() { ios_base::sync_with_stdio(0), in.tie(0), out.tie(0);preSolve();solve(0); postSolve(); }
 #endif
-
 #pragma endregion
 
 void preSolve() {}
 /* place for notes
 
+
+
 */
 
 void solve(int TT) {
-  it(str, s);
-  o s;
-  yn(s.size() > 3);
+
 }
