@@ -1,9 +1,10 @@
-#define MANY_TESTS 0
+#pragma once
 
-const auto IPT = R"(
- * input goes brrrr *
-)";
+#define DBG 1
+#define MANY_TESTS 1
+
 #pragma region
+const auto IPT = R"( * input goes brrrr * )";
 #define DBG 1
 #define COLORS 1
 // bruh template for cp by Wgmlgz ver 0.10  ->  https://github.com/Wgmlgz/Random-code/blob/main/Cp/template.cpp
@@ -108,12 +109,3 @@ mt19937 mt(666);
 void preSolve();void solve(int);void postSolve() { if (DBG) O CYAN << "finished in " << clock() * 1.0 / CLOCKS_PER_SEC << " sec" << endl; }
 signed main() { ios_base::sync_with_stdio(0), in.tie(0), out.tie(0);preSolve();if (MANY_TESTS) { ints(t);fo(i, t) { if (DBG) { out << YELLOW << " -- " << (i + 1) << " --\n" << RESET; }solve(t); } } else solve(0);postSolve(); }
 #pragma endregion
-
-void preSolve() {}
-/* place for notes
-
-*/
-
-void solve(int TT) {
-
-}
