@@ -1,6 +1,5 @@
 #pragma once
 
-#define DBG 1
 #define MANY_TESTS 1
 
 #pragma region

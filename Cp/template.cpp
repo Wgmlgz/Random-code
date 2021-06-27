@@ -1,11 +1,11 @@
-#define MANY_TESTS 0
+#define MANY_TESTS 1
 
 const auto IPT = R"(
- * input goes brrrr *
+ *input here ^-^*
 )";
 #pragma region
 #define DBG 1
-#define COLORS 1
+#define COLORS 0
 // bruh template for cp by Wgmlgz ver 0.10  ->  https://github.com/Wgmlgz/Random-code/blob/main/Cp/template.cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -90,7 +90,7 @@ STLCOUTP(map);STLCOUTP(multimap);STLCOUTP(unordered_map);STLCOUTP(unordered_mult
 template<typename T> ostream& operator<< (ostream& ot, const queue<T>& q) { vector<T> v; queue<T> qc = q; while (!qc.empty()) { v.push_back(qc.front()); qc.pop(); }return operator<<(ot, v); }
 template<typename T> ostream& operator<< (ostream& ot, const stack<T>& st) { vector<T> v; stack<T> stc = st; while (!stc.empty()) { v.push_back(stc.top()); stc.pop(); } reverse(v.begin(), v.end()); return operator<<(ot, v); }
 struct DebugDude { bool b = false; }; DebugDude DDT;struct OutDude {}; OutDude ODT;
-template<typename T>DebugDude& operator<< (DebugDude& d, T& x) { if (!DBG) ret d;out << GREEN << x << RESET << "\n";debo = 0;d.b = true;ret d; }template<typename T>OutDude& operator<< (OutDude& d, T& x) { O x << "\n";ret d; }
+template<typename T>DebugDude& operator<< (DebugDude& d, const T& x) { if (!DBG) ret d;out << GREEN << x << RESET << "\n";debo = 0;d.b = true;ret d; }template<typename T>OutDude& operator<< (OutDude& d, const T& x) { O x << "\n";ret d; }
 #define o debo=0,ODT<< 
 #define db debo=1,DDT.b=0,DDT<< 
 #if DBG
@@ -110,10 +110,8 @@ signed main() { ios_base::sync_with_stdio(0), in.tie(0), out.tie(0);preSolve();i
 #pragma endregion
 
 void preSolve() {}
-/* place for notes
-
-*/
+/* place for notes*/
 
 void solve(int TT) {
-
+  
 }
