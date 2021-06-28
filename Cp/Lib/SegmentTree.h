@@ -60,9 +60,9 @@ struct SegSum : public SegTree<int> {
 };
 
 struct SegMin : public SegTree<int> {
-  SegMin(const std::vector<int>& v) : SegTree(v, 0, [](auto a, auto b) { return std::min(a, b); }) {}
+  SegMin(const std::vector<int>& v) : SegTree(v, -INF, [](auto a, auto b) { return std::min(a, b); }) {}
 };
 
 struct SegMax : public SegTree<int> {
-  SegMax(const std::vector<int>& v) : SegTree(v, 0, [](auto a, auto b) { return std::max(a, b); }) {}
+  SegMax(const std::vector<int>& v) : SegTree(v, INF, [](auto a, auto b) { return std::max(a, b); }) {}
 };
